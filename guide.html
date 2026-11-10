@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>使用文档 · 书签坞 BookmarkDock</title>
+    <meta
+      name="description"
+      content="书签坞完整使用文档：安装、连接 GitHub、首次同步、多设备、自动同步、冲突处理、历史与回收站、端到端加密、导入导出与故障排查。"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./icon-128.png" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="site-head">
+        <a class="brand" href="./index.html">
+          <span class="logo" aria-hidden="true">🔖</span>
+          书签坞 · BookmarkDock
+        </a>
+        <nav class="nav" aria-label="站点导航">
+          <a href="./index.html">首页</a>
+          <a href="./guide.html" aria-current="page">使用文档</a>
+          <a href="./privacy.html">隐私政策</a>
+          <a href="./permissions.html">权限说明</a>
+        </nav>
+      </header>
+
+      <h1>使用文档</h1>
+      <p class="meta">适用版本 1.0.0 · 最近更新 2026-11-10 · 支持 Chrome / Edge / Firefox</p>
+
+      <nav class="toc" aria-label="目录">
+        <strong>目录</strong>
+        <ol>
+          <li><a href="#prepare">安装前准备</a></li>
+          <li><a href="#install">安装扩展</a></li>
+          <li><a href="#setup">首次配置（4 步）</a></li>
+          <li><a href="#second-device">添加第二台设备</a></li>
+          <li><a href="#sync">同步、状态与撤销</a></li>
+          <li><a href="#conflict">冲突处理</a></li>
+          <li><a href="#history">历史、回收站与导出</a></li>
+          <li><a href="#encryption">端到端加密</a></li>
+          <li><a href="#import">导入与迁移</a></li>
+          <li><a href="#privacy">数据与隐私</a></li>
+          <li><a href="#troubleshooting">故障排查</a></li>
+          <li><a href="#help">获取帮助</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="prepare">1. 安装前准备</h2>
+      <ul>
+        <li>
+          <strong>一个 GitHub 账号。</strong>书签会写入你账号下的一个 Gist；
+          不需要注册书签坞账号，也不需要信用卡。
+        </li>
+        <li>
+          <strong>支持的浏览器。</strong>Chrome、Edge 或 Firefox（Firefox 121 及以上）。
+          三个浏览器可以同时使用，并同步到同一个 Gist。
+        </li>
+        <li>
+          <strong>可选：一个加密密码。</strong>如果你希望云端只保存密文，可以在首次配置时开启
+          端到端加密。密码只保存在本机内存，忘记后无法找回。
+        </li>
+      </ul>
+      <div class="callout">
+        <p>
+          <strong>建议：</strong>第一次使用时，先在一台设备上完成配置和首次同步，
+          确认书签数量正确后，再添加其他设备。
+        </p>
+      </div>
+
+      <h2 id="install">2. 安装扩展</h2>
+      <ol>
+        <li>
+          从 Chrome Web Store、Microsoft Edge 加载项或 Firefox Add-ons 安装「书签坞 /
+          BookmarkDock」。
+        </li>
+        <li>安装完成后，扩展通常会自动打开配置向导。</li>
+        <li>
+          如果没有自动打开，点击浏览器工具栏上的书签坞图标，再点击
+          <strong>「开始配置」</strong>。
+        </li>
+      </ol>
+      <p>配置向导也可以随时从设置页重新进入：<strong>存储 → 连接 / 重新连接</strong>。</p>
+
+      <h2 id="setup">3. 首次配置（4 步）</h2>
+
+      <h3>第 1 步：选择存储</h3>
+      <p>
+        选择 <strong>GitHub Gist</strong>。书签坞没有自己的服务器，你选哪里，书签就写在哪里。 v1.0
+        仅支持 GitHub Gist。
+      </p>
+
+      <h3>第 2 步：连接 GitHub</h3>
+      <ol>
+        <li>点击 <strong>「使用 GitHub 账号授权」</strong>。</li>
+        <li>
+          扩展会打开 GitHub 授权页，并显示一串 <strong>8 位验证码</strong>。
+          如果页面没有自动打开，点击界面上的「点这里打开」。
+        </li>
+        <li>在 GitHub 页面输入验证码，确认授权。GitHub 只会授予读写 Gist 的权限。</li>
+        <li>授权完成后回到书签坞，扩展会自动读取你的 GitHub 账号并进入预览。</li>
+      </ol>
+      <p>
+        书签坞不会收到你的 GitHub 密码。授权完成后，扩展拿到的是一把只能操作 Gist 的密钥；
+        你随时可以在 GitHub 的授权设置里撤销它。
+      </p>
+
+      <details>
+        <summary>高级方式：手动粘贴 GitHub 访问密钥</summary>
+        <ol>
+          <li>
+            打开 GitHub →
+            <strong
+              >Settings → Developer settings → Personal access tokens → Tokens (classic)</strong
+            >。
+          </li>
+          <li>
+            点击 <strong>Generate new token (classic)</strong>，只勾选 <code>gist</code> 权限。
+          </li>
+          <li>生成后复制密钥（只显示一次），回到书签坞粘贴并点击「连接 GitHub」。</li>
+        </ol>
+        <p class="note">
+          密钥只保存在本机，仅用于读写你的 Gist。不要把它粘贴到聊天、截图或任何第三方网站。
+        </p>
+      </details>
+
+      <h3>第 3 步：确认合并</h3>
+      <p>
+        书签坞会先做一次<strong>只读预览</strong>，分别列出本机浏览器和云端文件将要发生的变化：
+        新增、修改、删除和排序调整。
+      </p>
+      <ul>
+        <li>两边都有的书签，取最近修改的那一份；只有一边有的，补到另一边。</li>
+        <li>不会用一边的内容整份覆盖另一边。</li>
+        <li>
+          如果这次会删除较多书签（默认超过 50 个或超过 10%），必须先勾选确认，
+          这就是<strong>删除熔断</strong>。
+        </li>
+      </ul>
+      <p>确认无误后点击「继续」。如果预览结果不对，可以点「刷新预览」重新比对。</p>
+
+      <h3>第 4 步：完成</h3>
+      <ul>
+        <li><strong>自动同步：</strong>建议保持开启。关闭后仍可在弹窗或设置页手动同步。</li>
+        <li>
+          <strong>端到端加密（可选）：</strong>开启后，书签在写入云端前会先加密。
+          需要输入两次密码并确认风险提示。
+        </li>
+        <li>点击「完成并开始同步」（开启加密时为「完成并开启加密」）。</li>
+      </ul>
+      <p class="note">Firefox 用户请在首次同步完成后保持书签坞窗口打开几秒，确保后台把内容写完。</p>
+
+      <h2 id="second-device">4. 添加第二台设备</h2>
+      <ol>
+        <li>在另一台设备上安装书签坞。</li>
+        <li>打开配置向导，连接<strong>同一个 GitHub 账号</strong>。</li>
+        <li>预览页会显示「已经在同步」，并给出云端与本机的节点数量。 确认合并结果后继续即可。</li>
+        <li>如果开启了端到端加密，在其他设备上需要输入<strong>同一个密码</strong>解锁。</li>
+      </ol>
+      <div class="callout warn">
+        <p>
+          <strong>不要同时启用浏览器自带的同步。</strong>
+          两套同步同时修改书签，可能产生重复节点或冲突。建议只保留书签坞这一套。
+        </p>
+      </div>
+
+      <h2 id="sync">5. 同步、状态与撤销</h2>
+
+      <h3>自动同步</h3>
+      <p>设置页 → <strong>同步</strong>：</p>
+      <ul>
+        <li><strong>自动同步开关：</strong>关闭后，只有你点击「立即同步」时才会同步。</li>
+        <li>
+          <strong>远端检查间隔：</strong>默认 60 秒，可改为 30 秒、2 分钟或 5 分钟。
+          本机书签发生变化时，会在约 3 秒内触发一次合并。
+        </li>
+        <li>
+          <strong>删除保护：</strong>可调整触发确认的百分比和数量阈值。 v1.0 默认是「超过 10% 或超过
+          50 个」。
+        </li>
+      </ul>
+
+      <h3>工具栏弹窗</h3>
+      <p>点击浏览器工具栏上的书签坞图标，可以：</p>
+      <ul>
+        <li>查看当前同步状态、上次同步时间和书签数量；</li>
+        <li>点击 <strong>「立即同步」</strong> 手动触发一次；</li>
+        <li>点击 <strong>「撤销」</strong> 回退上一次同步；</li>
+        <li>有冲突或错误时，直接跳到对应设置页处理。</li>
+      </ul>
+
+      <h3>撤销本次同步</h3>
+      <p>
+        设置页 → <strong>同步</strong> → <strong>「撤销本次」</strong>，或弹窗里的「撤销」。
+        它会把<strong>本机浏览器和云端文件一起</strong>退回上一次同步前的状态。
+      </p>
+      <p class="note">
+        撤销前会先保存一份安全快照，避免二次误操作。撤销只影响最近一次同步，
+        更早的历史请使用「历史」页的快照恢复。
+      </p>
+
+      <h2 id="conflict">6. 冲突处理</h2>
+      <p>
+        大多数改动会自动合并。只有同一节点在两端都被修改、且无法判断先后时， 才会进入设置页 → 同步 →
+        <strong>冲突中心</strong>。
+      </p>
+      <p>每个冲突会并排显示本地与远端版本，你可以选择：</p>
+      <ul>
+        <li><strong>保留本地：</strong>用本机版本覆盖该节点；</li>
+        <li><strong>保留远端：</strong>用云端版本覆盖该节点；</li>
+        <li><strong>两者都留：</strong>保留两个版本，便于之后手动整理。</li>
+      </ul>
+      <p>处理完冲突后，下一次同步会自动收敛。冲突不会阻止其他不相关书签的同步。</p>
+
+      <h2 id="history">7. 历史、回收站与导出</h2>
+      <p>设置页 → <strong>历史</strong>。</p>
+
+      <h3>快照</h3>
+      <ul>
+        <li>
+          每次真正修改浏览器书签前，书签坞会自动保存一份快照；也可以点击「保存快照」手动创建。
+        </li>
+        <li>默认最多保留 50 份，并丢弃超过 7 天的快照。</li>
+        <li>
+          <strong>恢复快照是精确回滚：</strong>当前书签会变成该快照的状态；
+          快照之后新增的内容会被移除。恢复前会自动保存一份安全快照，方便反悔。
+        </li>
+      </ul>
+
+      <h3>回收站</h3>
+      <ul>
+        <li>删除的书签和文件夹会进入回收站，默认保留 7 天。</li>
+        <li>可以按标题或网址搜索，勾选多个条目后批量恢复。</li>
+        <li>恢复文件夹时，会连同其中的子项一起恢复。</li>
+      </ul>
+
+      <h3>导出备份</h3>
+      <ul>
+        <li><strong>导出 JSON：</strong>保留完整节点信息，适合备份或迁移到其他书签坞实例。</li>
+        <li>
+          <strong>导出 HTML：</strong>标准 Netscape 书签格式，可直接导入 Chrome / Edge / Firefox。
+        </li>
+      </ul>
+
+      <h2 id="encryption">8. 端到端加密</h2>
+      <p>
+        设置页 → <strong>安全</strong>，或首次配置的最后一步。加密算法为
+        <strong>Argon2id + AES-256-GCM</strong>，云端只能看到密文。
+      </p>
+
+      <h3>开启加密</h3>
+      <ol>
+        <li>输入密码并再次确认。建议至少 12 位，界面会显示强度。</li>
+        <li>勾选「我明白：忘记密码将无法解密云端书签」。</li>
+        <li>点击「开启加密」。开启后，云端文件会被重写为密文。</li>
+      </ol>
+
+      <h3>日常使用</h3>
+      <ul>
+        <li>密码只保存在当前浏览器会话的内存里，关闭浏览器后会自动锁定。</li>
+        <li>锁定后在安全页输入密码即可解锁；其他设备需要使用同一个密码。</li>
+        <li>可以随时修改密码或关闭加密。</li>
+      </ul>
+      <p class="note">
+        关闭加密后云端文件会恢复为明文，任何能访问该 Gist 的人都能看到书签；
+        关闭前会自动保存快照，请确认风险后再操作。
+      </p>
+
+      <div class="callout warn">
+        <p>
+          <strong>忘记密码无法找回。</strong>开发者没有后门，也无法解密你的云端文件。
+          如果还有一台设备处于已解锁状态，可以在那台设备重新同步或导出备份。
+        </p>
+      </div>
+
+      <h2 id="import">9. 导入与迁移</h2>
+      <p>设置页 → <strong>历史</strong> → <strong>从其他工具导入</strong>。</p>
+      <ol>
+        <li>
+          选择 BookmarkHub 导出的明文 JSON，或 Chrome / Edge / Firefox 导出的书签 HTML （支持
+          <code>.json</code> / <code>.html</code>，最大 20 MB）。
+        </li>
+        <li>先看预览：会新增多少文件夹和书签、跳过多少已存在节点与重复网址。</li>
+        <li>确认后自动保存一份 <code>import</code> 快照，再开始导入。</li>
+      </ol>
+      <p>导入规则：</p>
+      <ul>
+        <li><strong>只增不改：</strong>已有书签的标题、网址和位置不会被覆盖或删除。</li>
+        <li>同父同名文件夹会复用，已有网址会精确去重。</li>
+        <li>
+          BookmarkHub 的加密导出文件无法直接导入。请先在 BookmarkHub 中关闭加密， 重新导出明文
+          JSON。
+        </li>
+      </ul>
+
+      <h2 id="privacy">10. 数据与隐私</h2>
+      <ul>
+        <li>
+          <strong>书签数据：</strong>直接写入你自己配置的 Gist。 开发者没有你的 Token，也没有该 Gist
+          的访问权限。
+        </li>
+        <li>
+          <strong>本机数据：</strong>设置、GitHub 密钥、同步状态、ID 映射、快照、回收站和冲突记录，
+          保存在浏览器的本地存储与 IndexedDB 中。
+        </li>
+        <li>
+          <strong>网络请求：</strong>只访问 GitHub（同步与授权）。 v1.0
+          不启用付费闸门，正常使用不会触发其他请求。
+        </li>
+        <li><strong>零遥测：</strong>没有分析、崩溃上报、A/B 测试或远程配置 SDK。</li>
+      </ul>
+      <p>
+        完整清单见 <a href="./privacy.html">隐私政策</a> 与
+        <a href="./permissions.html">权限说明</a>。
+      </p>
+
+      <h2 id="troubleshooting">11. 故障排查</h2>
+
+      <h3>提示需要重新授权，或同步一直失败</h3>
+      <ul>
+        <li>打开 设置 → <strong>存储</strong>，确认 GitHub 账号与 Gist 已连接。</li>
+        <li>点击「重新连接」，重新走一次 GitHub 授权。</li>
+        <li>确认网络可以访问 <code>api.github.com</code>，并检查 GitHub 是否出现服务故障。</li>
+      </ul>
+
+      <h3>提示权限不足 / 缺少 gist 权限</h3>
+      <ul>
+        <li>如果使用手动密钥，请确认 token 勾选了 <code>gist</code> 权限。</li>
+        <li>如果使用 GitHub 授权，请重新连接并同意 Gist 权限。</li>
+      </ul>
+
+      <h3>同步被删除保护拦住了</h3>
+      <p>
+        说明这次同步会删除较多书签。确认这些删除确实是你做的，再在提示里勾选确认；
+        否则先取消，检查是否有其他设备误删，或从「历史」页恢复快照。
+      </p>
+
+      <h3>快照或回收站条目不见了</h3>
+      <p>
+        快照默认最多保留 50 份、7 天；回收站默认保留 7 天。
+        超过限制的条目会被自动清理。重要状态请及时导出 JSON 或 HTML 备份。
+      </p>
+
+      <h3>另一台设备上的加密书签打不开</h3>
+      <p>
+        确认所有设备使用的是<strong>同一个加密密码</strong>。 如果刚关闭浏览器，需要在 设置 → 安全
+        中重新解锁。
+      </p>
+
+      <h3>导入 BookmarkHub 文件时提示加密</h3>
+      <p>
+        书签坞不复刻 BookmarkHub 的闭源加密格式。请先在 BookmarkHub 中关闭加密， 导出明文 JSON
+        后再导入。
+      </p>
+
+      <h3>书签出现重复或反复冲突</h3>
+      <p>
+        先确认没有同时开启浏览器自带同步；再确认所有设备连接的是<strong
+          >同一个 GitHub 账号和同一个 Gist</strong
+        >。 必要时在冲突中心选择版本，或从快照恢复。
+      </p>
+
+      <h2 id="help">12. 获取帮助</h2>
+      <ul>
+        <li>
+          问题与建议：<a href="https://gitee.com/sunnice/book-mark-sync/issues">Gitee Issues</a>
+        </li>
+        <li>支持邮箱：<code>dev@bookmarkdock.app</code></li>
+      </ul>
+      <p>
+        提交问题时，请说明浏览器与版本、书签坞版本、复现步骤和界面上的错误提示。 请不要在公开 Issue
+        中粘贴 GitHub Token、加密密码或包含隐私的书签内容。
+      </p>
+
+      <footer>
+        书签坞 · BookmarkDock · <a href="./index.html">首页</a> ·
+        <a href="./privacy.html">隐私政策</a> ·
+        <a href="./permissions.html">权限说明</a>
+      </footer>
+    </main>
+  </body>
+</html>

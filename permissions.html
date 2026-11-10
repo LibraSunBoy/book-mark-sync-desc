@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>权限说明 · 书签坞 BookmarkDock</title>
+    <meta
+      name="description"
+      content="书签坞逐条解释每个浏览器权限的用途，以及为什么不需要更多权限。"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./icon-128.png" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="site-head">
+        <a class="brand" href="./index.html">
+          <span class="logo" aria-hidden="true">🔖</span>
+          书签坞 · BookmarkDock
+        </a>
+        <nav class="nav" aria-label="站点导航">
+          <a href="./index.html">首页</a>
+          <a href="./guide.html">使用文档</a>
+          <a href="./privacy.html">隐私政策</a>
+          <a href="./permissions.html" aria-current="page">权限说明</a>
+        </nav>
+      </header>
+
+      <h1>权限说明</h1>
+      <p class="meta">对应扩展版本 1.0.0 · 审核与用户可见说明一致</p>
+
+      <h2>单一用途</h2>
+      <p>
+        书签坞的唯一用途是：<strong>在用户自己的存储位置之间同步浏览器书签</strong>。
+        扩展不修改网页、不拦截请求、不读取页面内容。
+      </p>
+
+      <h2>必需权限</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>权限</th>
+            <th>用途</th>
+            <th>用户在哪里感知</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>bookmarks</code></td>
+            <td>读取书签树、监听增删改、在同步时写入书签。</td>
+            <td>预览、同步、导入、恢复、撤销书签时。</td>
+          </tr>
+          <tr>
+            <td><code>storage</code></td>
+            <td>保存设置、凭据、同步状态、快照、回收站与 ID 映射。</td>
+            <td>安装后即需要；不涉及网页数据。</td>
+          </tr>
+          <tr>
+            <td><code>alarms</code></td>
+            <td>按设定间隔唤醒后台，轮询远端变化。</td>
+            <td>设置里的"同步间隔"。</td>
+          </tr>
+          <tr>
+            <td><code>notifications</code></td>
+            <td>同步失败、删除熔断需要确认时发系统通知。</td>
+            <td>出现需要用户处理的错误时。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>可选主机权限（按需申请）</h2>
+      <p>
+        这些权限<strong>默认不授予</strong>，只在你点击"连接 GitHub"或"激活 License"时，
+        由浏览器弹出授权框，你同意后才生效。拒绝不影响书签本地管理。
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>域名</th>
+            <th>用途</th>
+            <th>触发动作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>https://api.github.com/*</code></td>
+            <td>校验 Token、读写 Gist、GitHub Device Flow。</td>
+            <td>连接 GitHub / 同步</td>
+          </tr>
+          <tr>
+            <td><code>https://github.com/*</code></td>
+            <td>Device Flow 授权页、打开 Gist 管理页。</td>
+            <td>连接 GitHub</td>
+          </tr>
+          <tr>
+            <td><code>https://gist.githubusercontent.com/*</code></td>
+            <td>读取 Gist 原始内容。</td>
+            <td>同步</td>
+          </tr>
+          <tr>
+            <td><code>https://*.githubusercontent.com/*</code></td>
+            <td>GitHub 内容 CDN 重定向。</td>
+            <td>同步</td>
+          </tr>
+          <tr>
+            <td><code>https://api.lemonsqueezy.com/*</code></td>
+            <td>License 激活、校验、释放设备。</td>
+            <td>点击"激活 / 刷新"</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>不需要的权限</h2>
+      <ul>
+        <li>
+          <strong>tabs / activeTab / scripting</strong>：不同步标签页，不注入脚本，不修改网页。
+        </li>
+        <li><strong>history</strong>：不读取浏览历史。</li>
+        <li><strong>webRequest / proxy</strong>：不拦截或修改任何网络请求。</li>
+        <li><strong>cookies</strong>：不使用 Cookie。</li>
+        <li><strong>&lt;all_urls&gt;</strong>：不需要访问任意网站。</li>
+      </ul>
+
+      <h2>远程代码</h2>
+      <p>
+        本扩展<strong>不加载、不执行任何远程代码</strong>。所有 JavaScript 都打包在安装包内， 不使用
+        <code>eval</code>、<code>new Function</code> 或动态 <code>&lt;script&gt;</code> 注入。
+      </p>
+
+      <h2>数据使用声明</h2>
+      <ul>
+        <li>不收集个人身份信息、健康、财务、认证、通信、位置、网页浏览记录；</li>
+        <li>书签内容仅写入用户自己配置的存储，不发送给开发者；</li>
+        <li>不向第三方出售数据，不用于广告，不用于信用评估；</li>
+        <li>零遥测：不包含任何统计或崩溃上报 SDK。</li>
+      </ul>
+
+      <footer>
+        书签坞 · BookmarkDock · <a href="./index.html">首页</a> ·
+        <a href="./guide.html">使用文档</a> ·
+        <a href="./privacy.html">隐私政策</a>
+      </footer>
+    </main>
+  </body>
+</html>

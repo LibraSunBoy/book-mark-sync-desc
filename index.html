@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>书签坞 · BookmarkDock — 免费、即时、跨浏览器的书签同步</title>
+    <meta
+      name="description"
+      content="书签坞把 Chrome / Edge / Firefox 的书签自动同步到你自己拥有的 GitHub Gist：核心同步永久免费、零遥测、可选端到端加密。"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./icon-128.png" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="site-head">
+        <a class="brand" href="./index.html">
+          <span class="logo" aria-hidden="true">🔖</span>
+          书签坞 · BookmarkDock
+        </a>
+        <nav class="nav" aria-label="站点导航">
+          <a href="./index.html" aria-current="page">首页</a>
+          <a href="./guide.html">使用文档</a>
+          <a href="./privacy.html">隐私政策</a>
+          <a href="./permissions.html">权限说明</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <span class="eyebrow">v1.0.0 · 核心同步永久免费</span>
+        <h1>书签同步，本该免费</h1>
+        <p class="lead">
+          书签坞（BookmarkDock）把 Chrome、Edge、Firefox 的书签自动同步到
+          <strong>你自己的 GitHub Gist</strong>。没有账号体系，没有自建服务器，没有遥测；
+          可选端到端加密。
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="./guide.html">查看使用文档</a>
+          <a class="btn btn-secondary" href="./privacy.html">阅读隐私政策</a>
+        </div>
+        <p class="meta">
+          支持 Chrome / Edge / Firefox · 当前存储后端：GitHub Gist · 无需注册书签坞账号
+        </p>
+      </section>
+
+      <div class="grid">
+        <div class="tile">
+          <h3>自动同步永不收费</h3>
+          <p>改完书签约 3 秒内合并，多设备最终一致。核心同步不设会员墙。</p>
+        </div>
+        <div class="tile">
+          <h3>数据在你自己手里</h3>
+          <p>BYO 存储：书签直接写入你的 Gist，开发者没有 Token，也没有访问权。</p>
+        </div>
+        <div class="tile">
+          <h3>零遥测</h3>
+          <p>没有分析 SDK、没有埋点、没有“匿名统计”。网络请求清单公开。</p>
+        </div>
+        <div class="tile">
+          <h3>不丢数据</h3>
+          <p>删除熔断、7 天回收站、自动快照、一键撤销本次同步。</p>
+        </div>
+      </div>
+
+      <h2>它是怎么工作的</h2>
+      <ol class="steps">
+        <li>
+          <strong>连接 GitHub</strong>
+          <p>点击「连接 GitHub」，在 GitHub 页面输入 8 位码，授权创建一个只有你知道的 Gist。</p>
+        </li>
+        <li>
+          <strong>先预览，再合并</strong>
+          <p>逐条比较本机与云端：两边都有时取最近修改的版本，只有一边有时补到另一边。</p>
+        </li>
+        <li>
+          <strong>多设备自动收敛</strong>
+          <p>其他设备授权同一个 GitHub 账号即可。本机改动约 3 秒合并，云端默认每 60 秒检查一次。</p>
+        </li>
+      </ol>
+
+      <div class="callout">
+        <p>
+          <strong>没有中间服务器：</strong>书签从你的浏览器直接写入你的 Gist。
+          书签坞不中转、不保存、也无法读取其中的内容。
+        </p>
+      </div>
+
+      <h2>主要功能</h2>
+      <ul class="features">
+        <li>
+          <strong>自动同步：</strong>本机书签变化约 3 秒内合并，默认每 60 秒检查远端（可调 30 秒–1
+          小时）。
+        </li>
+        <li><strong>确定性双向合并：</strong>多设备同时改也不打架，最终自动收敛。</li>
+        <li>
+          <strong>冲突中心：</strong
+          >只有真正无法自动合并的节点才需要你决定：保留本地、保留远端或两者都留。
+        </li>
+        <li>
+          <strong>删除熔断：</strong>一次删除超过 50 个或超过 10% 时先确认，避免误删扩散到所有设备。
+        </li>
+        <li>
+          <strong>历史与恢复：</strong>每次产生浏览器改动前自动保存快照，最多 50 份，默认保留 7 天。
+        </li>
+        <li><strong>一键撤销：</strong>把本机和云端一起退回上一次同步前。</li>
+        <li><strong>回收站：</strong>删除的书签和文件夹保留 7 天，可搜索、批量恢复。</li>
+        <li>
+          <strong>端到端加密：</strong>可选开启，云端只保存 AES-256-GCM 密文，密码只在本机内存。
+        </li>
+        <li>
+          <strong>导入迁移：</strong>支持 BookmarkHub JSON 和 Chrome / Edge / Firefox 导出的
+          HTML，先预览再合并，只增不改。
+        </li>
+        <li><strong>导出备份：</strong>随时导出 JSON 或浏览器可导入的 HTML。</li>
+      </ul>
+
+      <h2>界面预览</h2>
+      <div class="shots">
+        <figure class="shot">
+          <img
+            src="./screenshots/01-sync.png"
+            alt="书签坞设置页：同步状态、自动同步和删除保护"
+            loading="lazy"
+          />
+          <figcaption>同步状态、自动同步间隔与删除熔断设置。</figcaption>
+        </figure>
+        <figure class="shot">
+          <img
+            src="./screenshots/02-history.png"
+            alt="书签坞历史页：快照、回收站与导出"
+            loading="lazy"
+          />
+          <figcaption>快照、撤销、回收站与 JSON / HTML 导出。</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="./screenshots/04-onboarding.png" alt="书签坞首次配置向导" loading="lazy" />
+          <figcaption>四步完成首次配置，先预览再改动任何一边。</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="./screenshots/05-popup.png" alt="书签坞工具栏弹窗" loading="lazy" />
+          <figcaption>工具栏弹窗：立即同步、查看状态、一键撤销。</figcaption>
+        </figure>
+      </div>
+
+      <h2>隐私与安全</h2>
+      <ul class="features">
+        <li>
+          <strong>不收集书签、网址或浏览历史：</strong>开发者没有你的 GitHub Token，也没有 Gist
+          的访问权限。
+        </li>
+        <li><strong>零遥测：</strong>没有分析、崩溃上报、A/B 测试或远程配置 SDK。</li>
+        <li>
+          <strong>网络请求可枚举：</strong>只访问 GitHub（同步与授权）；v1.0
+          不启用付费闸门，正常使用不会触发其他请求。
+        </li>
+        <li><strong>可选端到端加密：</strong>AES-256-GCM + Argon2id，云端只能看到密文。</li>
+        <li><strong>权限按需申请：</strong>不需要“读取所有网站”，不注入脚本，不读取页面内容。</li>
+      </ul>
+      <p>
+        完整说明见 <a href="./privacy.html">隐私政策</a> 与
+        <a href="./permissions.html">权限说明</a>。
+      </p>
+
+      <h2>常见问题</h2>
+      <div class="faq">
+        <details open>
+          <summary>真的免费吗？</summary>
+          <p>
+            是。核心自动同步永久免费，不限制设备数量，也没有“高级同步”。 v1.0 全部功能免费，不校验
+            License。
+          </p>
+        </details>
+        <details>
+          <summary>需要注册书签坞账号吗？</summary>
+          <p>不需要。你只需要一个 GitHub 账号，用来存放自己的 Gist。</p>
+        </details>
+        <details>
+          <summary>书签到底存在哪里？</summary>
+          <p>
+            存在你 GitHub 账号下的一个 Gist 文件里。默认创建 secret gist； 开发者没有你的
+            Token，也没有该 Gist 的访问权。
+          </p>
+        </details>
+        <details>
+          <summary>支持 WebDAV、坚果云或 S3 吗？</summary>
+          <p>v1.0 仅支持 GitHub Gist。后续版本会评估更多 BYO 存储，但当前版本没有这些入口。</p>
+        </details>
+        <details>
+          <summary>忘记加密密码怎么办？</summary>
+          <p>
+            无法找回。密码只存在于本机内存，开发者也没有后门。
+            如果还有一台设备保留着明文同步状态，可以在那台设备重新同步； 否则云端密文无法解密。
+          </p>
+        </details>
+        <details>
+          <summary>第二台设备怎么加入？</summary>
+          <p>
+            安装扩展，连接同一个 GitHub 账号，确认预览结果后合并即可。 不需要手动复制文件或 Token。
+          </p>
+        </details>
+        <details>
+          <summary>卸载扩展会删除浏览器书签吗？</summary>
+          <p>不会。卸载只会清除扩展自己的本地状态；浏览器书签和远端 Gist 都不受影响。</p>
+        </details>
+      </div>
+
+      <h2>开始使用</h2>
+      <div class="actions">
+        <a class="btn btn-primary" href="./guide.html">阅读安装与配置文档</a>
+        <a class="btn btn-secondary" href="./permissions.html">查看权限说明</a>
+      </div>
+
+      <h2>链接</h2>
+      <ul>
+        <li><a href="./guide.html">使用文档</a></li>
+        <li><a href="./privacy.html">隐私政策 / Privacy Policy</a></li>
+        <li><a href="./permissions.html">权限说明 / Permissions</a></li>
+        <li><a href="https://gitee.com/sunnice/book-mark-sync">源码与问题反馈（Gitee）</a></li>
+      </ul>
+
+      <footer>书签坞 · BookmarkDock · v1.0.0 · 最近更新 2026-11-10</footer>
+    </main>
+  </body>
+</html>
