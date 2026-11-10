@@ -12,8 +12,8 @@
     <link rel="icon" href="./icon-128.png" />
   </head>
   <body>
-    <main class="wrap">
-      <header class="site-head">
+    <header class="site-head">
+      <div class="head-inner">
         <a class="brand" href="./index.html">
           <span class="logo" aria-hidden="true">🔖</span>
           书签坞 · BookmarkDock
@@ -24,39 +24,84 @@
           <a href="./privacy.html">隐私政策</a>
           <a href="./permissions.html">权限说明</a>
         </nav>
-      </header>
+      </div>
+    </header>
 
+    <main class="wrap">
       <section class="hero">
-        <span class="eyebrow">v1.0.0 · 核心同步永久免费</span>
-        <h1>书签同步，本该免费</h1>
-        <p class="lead">
-          书签坞（BookmarkDock）把 Chrome、Edge、Firefox 的书签自动同步到
-          <strong>你自己的 GitHub Gist</strong>。没有账号体系，没有自建服务器，没有遥测；
-          可选端到端加密。
-        </p>
-        <div class="actions">
-          <a class="btn btn-primary" href="./guide.html">查看使用文档</a>
-          <a class="btn btn-secondary" href="./privacy.html">阅读隐私政策</a>
+        <div class="hero-copy">
+          <span class="eyebrow">v1.0.0 · 核心同步永久免费</span>
+          <h1>书签同步，<br />本该免费</h1>
+          <p class="lead">
+            书签坞（BookmarkDock）把 Chrome、Edge、Firefox 的书签自动同步到
+            <strong>你自己的 GitHub Gist</strong>。没有账号体系，没有自建服务器，没有遥测；
+            可选端到端加密。
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="./guide.html">查看使用文档</a>
+            <a class="btn btn-secondary" href="./privacy.html">阅读隐私政策</a>
+          </div>
+          <p class="meta">
+            支持 Chrome / Edge / Firefox · 当前存储后端：GitHub Gist · 无需注册书签坞账号
+          </p>
         </div>
-        <p class="meta">
-          支持 Chrome / Edge / Firefox · 当前存储后端：GitHub Gist · 无需注册书签坞账号
-        </p>
+
+        <div class="hero-visual">
+          <div class="sync-card">
+            <div class="sync-card-head">
+              <span class="sync-dot" aria-hidden="true"></span>
+              自动同步已开启
+              <span class="sync-time">刚刚</span>
+            </div>
+            <ul class="sync-flow">
+              <li>
+                <span class="node-icon" aria-hidden="true">🖥️</span>
+                <span class="node-text">
+                  <strong>本机浏览器</strong>
+                  <small>1,284 个书签 · 本机改动约 3 秒合并</small>
+                </span>
+                <span class="node-state ok">已推送</span>
+              </li>
+              <li>
+                <span class="node-icon" aria-hidden="true">☁️</span>
+                <span class="node-text">
+                  <strong>你的 GitHub Gist</strong>
+                  <small>bookmarks.json · 可选 AES-256-GCM 加密</small>
+                </span>
+                <span class="node-state">你的账号</span>
+              </li>
+              <li>
+                <span class="node-icon" aria-hidden="true">💻</span>
+                <span class="node-text">
+                  <strong>第二台设备</strong>
+                  <small>自动合并，无需手动复制文件</small>
+                </span>
+                <span class="node-state ok">已同步</span>
+              </li>
+            </ul>
+            <p class="sync-foot">没有中间服务器 · 开发者没有 Token，也无法读取</p>
+          </div>
+        </div>
       </section>
 
       <div class="grid">
         <div class="tile">
+          <span class="tile-icon" aria-hidden="true">⚡</span>
           <h3>自动同步永不收费</h3>
           <p>改完书签约 3 秒内合并，多设备最终一致。核心同步不设会员墙。</p>
         </div>
         <div class="tile">
+          <span class="tile-icon" aria-hidden="true">🔐</span>
           <h3>数据在你自己手里</h3>
           <p>BYO 存储：书签直接写入你的 Gist，开发者没有 Token，也没有访问权。</p>
         </div>
         <div class="tile">
+          <span class="tile-icon" aria-hidden="true">📡</span>
           <h3>零遥测</h3>
           <p>没有分析 SDK、没有埋点、没有“匿名统计”。网络请求清单公开。</p>
         </div>
         <div class="tile">
+          <span class="tile-icon" aria-hidden="true">💾</span>
           <h3>不丢数据</h3>
           <p>删除熔断、7 天回收站、自动快照、一键撤销本次同步。</p>
         </div>
@@ -155,6 +200,7 @@
         </li>
         <li><strong>可选端到端加密：</strong>AES-256-GCM + Argon2id，云端只能看到密文。</li>
         <li><strong>权限按需申请：</strong>不需要“读取所有网站”，不注入脚本，不读取页面内容。</li>
+        <li><strong>开源可审计：</strong>源码公开，权限清单与网络请求都可以自行核对。</li>
       </ul>
       <p>
         完整说明见 <a href="./privacy.html">隐私政策</a> 与
@@ -204,21 +250,29 @@
         </details>
       </div>
 
-      <h2>开始使用</h2>
-      <div class="actions">
-        <a class="btn btn-primary" href="./guide.html">阅读安装与配置文档</a>
-        <a class="btn btn-secondary" href="./permissions.html">查看权限说明</a>
-      </div>
+      <section class="cta">
+        <div>
+          <h2>准备好同步了吗？</h2>
+          <p>安装后约 2 分钟完成配置：一个 GitHub 账号，一个只有你知道的 Gist。</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="./guide.html">阅读安装与配置文档</a>
+          <a class="btn btn-secondary" href="./permissions.html">查看权限说明</a>
+        </div>
+      </section>
 
-      <h2>链接</h2>
-      <ul>
-        <li><a href="./guide.html">使用文档</a></li>
-        <li><a href="./privacy.html">隐私政策 / Privacy Policy</a></li>
-        <li><a href="./permissions.html">权限说明 / Permissions</a></li>
-        <li><a href="https://gitee.com/sunnice/book-mark-sync">源码与问题反馈（Gitee）</a></li>
-      </ul>
-
-      <footer>书签坞 · BookmarkDock · v1.0.0 · 最近更新 2026-11-10</footer>
+      <footer class="site-foot">
+        <div>
+          <strong>书签坞 · BookmarkDock</strong>
+          <p>免费、即时、跨浏览器的书签同步 · v1.0.0 · 最近更新 2026-11-10</p>
+        </div>
+        <nav aria-label="页脚导航">
+          <a href="./guide.html">使用文档</a>
+          <a href="./privacy.html">隐私政策</a>
+          <a href="./permissions.html">权限说明</a>
+          <a href="https://gitee.com/sunnice/book-mark-sync">源码与问题反馈（Gitee）</a>
+        </nav>
+      </footer>
     </main>
   </body>
 </html>
