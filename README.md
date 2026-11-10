@@ -40,13 +40,16 @@ npx serve site
 2. 打开仓库 **Settings → Pages**。
 3. **Build and deployment → Source** 选择 **Deploy from a branch**。
 4. Branch 选择 `main`，目录选择 `/ (root)`，点击 Save。
-5. 发布地址为 `https://<user>.github.io/<repo>/`。
+5. 发布地址通常为 `https://<user>.github.io/<repo>/`。
 
 本仓库对应的地址是：
 
 ```
 https://librasunboy.github.io/book-mark-sync-desc/
 ```
+
+仓库已启用 GitHub Pages（`main` / root），首页、使用文档、隐私政策、权限说明
+四个页面均可直接访问。
 
 可选：在仓库根目录放一个空的 `.nojekyll` 文件，跳过 Jekyll 处理。
 
