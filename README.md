@@ -84,4 +84,4 @@ https://librasunboy.github.io/book-mark-sync-desc/
 - [ ] 页面标题与扩展名称一致；
 - [ ] 文中不出现“我们收集…”这类与零遥测矛盾的表述；
 - [ ] 页面中的 GitHub / Gitee 链接可访问；
-- [ ] 联系邮箱可用（`dev@bookmarkdock.app`）。
+- [ ] 联系邮箱可用（`jydsunnice@gmail.com`）。
