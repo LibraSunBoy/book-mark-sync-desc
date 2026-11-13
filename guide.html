@@ -6,7 +6,7 @@
     <title>使用文档 · 书签坞 BookmarkDock</title>
     <meta
       name="description"
-      content="书签坞完整使用文档：安装、连接 GitHub、首次同步、多设备、自动同步、冲突处理、历史与回收站、端到端加密、导入导出与故障排查。"
+      content="书签坞完整使用文档：安装、连接 GitHub、首次同步、多设备、自动同步、冲突处理、历史与回收站、死链检测、端到端加密、导入导出与故障排查。"
     />
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="./icon-128.png" />
@@ -40,6 +40,7 @@
               <li><a href="#sync">同步、状态与撤销</a></li>
               <li><a href="#conflict">冲突处理</a></li>
               <li><a href="#history">历史、回收站与导出</a></li>
+              <li><a href="#maintenance">死链检测</a></li>
               <li><a href="#encryption">端到端加密</a></li>
               <li><a href="#import">导入与迁移</a></li>
               <li><a href="#privacy">数据与隐私</a></li>
@@ -51,7 +52,7 @@
 
         <article class="doc-body">
           <h1>使用文档</h1>
-          <p class="meta">适用版本 1.0.0 · 最近更新 2026-11-10 · 支持 Chrome / Edge / Firefox</p>
+          <p class="meta">适用版本 1.1.0 · 最近更新 2026-11-13 · 支持 Chrome / Edge / Firefox</p>
 
           <h2 id="prepare">1. 安装前准备</h2>
           <ul>
@@ -243,7 +244,7 @@
             <li>
               每次真正修改浏览器书签前，书签坞会自动保存一份快照；也可以点击「保存快照」手动创建。
             </li>
-            <li>默认最多保留 50 份，并丢弃超过 7 天的快照。</li>
+            <li>默认最多保留 3 份，并丢弃超过 7 天的快照。</li>
             <li>
               <strong>恢复快照是精确回滚：</strong>当前书签会变成该快照的状态；
               快照之后新增的内容会被移除。恢复前会自动保存一份安全快照，方便反悔。
@@ -266,7 +267,37 @@
             </li>
           </ul>
 
-          <h2 id="encryption">8. 端到端加密</h2>
+          <h2 id="maintenance">8. 死链检测</h2>
+          <p>设置页 → <strong>维护</strong>。</p>
+          <ol>
+            <li>点击「开始检测」。第一次使用时会请求访问网站的可选权限，用于逐个访问书签网址。</li>
+            <li>检测并发进行，进度条会显示已完成数量，随时可以停止。</li>
+            <li>检测结束后，死链会单独列出来；点击「删除 N 个死链」确认后才会真正删除。</li>
+          </ol>
+
+          <h3>判定规则（纯规则，不经过 AI）</h3>
+          <ul>
+            <li><strong>404 / 410</strong>：判为死链，可以删除。</li>
+            <li>
+              <strong>401 / 403 / 429 / 5xx / 超时 / 网络错误</strong>：一律显示为「无法确认」，
+              <strong>不会删除</strong>。很多站点对非浏览器请求返回 403，或临时限流，删掉很危险。
+            </li>
+            <li>只读取 HTTP 状态码，拿到响应头后立刻中断，不下载页面，不带 Cookie。</li>
+          </ul>
+
+          <h3>白名单</h3>
+          <ul>
+            <li>每行一条，支持 <code>example.com</code>（含所有子域）、<code>*.example.com</code>、URL 前缀。</li>
+            <li>内网与本机地址（<code>localhost</code>、<code>192.168.*</code>、<code>10.*</code>、<code>172.16–31.*</code> 等）自动跳过。</li>
+          </ul>
+
+          <h3>自动删除</h3>
+          <p>
+            默认关闭。打开后，扫描结束立即删除判定为 404 / 410 的书签；删除会像普通删除一样
+            <strong>同步到其他设备</strong>，也会进入回收站，7 天内可以恢复。建议先手动模式跑一轮，确认结果可信再考虑打开。
+          </p>
+
+          <h2 id="encryption">9. 端到端加密</h2>
           <p>
             设置页 → <strong>安全</strong>，或首次配置的最后一步。加密算法为
             <strong>Argon2id + AES-256-GCM</strong>，云端只能看到密文。
@@ -297,7 +328,7 @@
             </p>
           </div>
 
-          <h2 id="import">9. 导入与迁移</h2>
+          <h2 id="import">10. 导入与迁移</h2>
           <p>设置页 → <strong>历史</strong> → <strong>从其他工具导入</strong>。</p>
           <ol>
             <li>
@@ -317,7 +348,7 @@
             </li>
           </ul>
 
-          <h2 id="privacy">10. 数据与隐私</h2>
+          <h2 id="privacy">11. 数据与隐私</h2>
           <ul>
             <li>
               <strong>书签数据：</strong>直接写入你自己配置的 Gist。 开发者没有你的 Token，也没有该
@@ -328,8 +359,8 @@
               映射、快照、回收站和冲突记录， 保存在浏览器的本地存储与 IndexedDB 中。
             </li>
             <li>
-              <strong>网络请求：</strong>只访问 GitHub（同步与授权）。 v1.0
-              不启用付费闸门，正常使用不会触发其他请求。
+              <strong>网络请求：</strong>同步与授权只访问 GitHub。死链检测会对书签里的网址发起一次
+              普通 GET 请求，只读取 HTTP 状态码，不读取页面内容、无 Cookie、无来源页、无第三方服务。
             </li>
             <li><strong>零遥测：</strong>没有分析、崩溃上报、A/B 测试或远程配置 SDK。</li>
           </ul>
@@ -338,7 +369,7 @@
             <a href="./permissions.html">权限说明</a>。
           </p>
 
-          <h2 id="troubleshooting">11. 故障排查</h2>
+          <h2 id="troubleshooting">12. 故障排查</h2>
 
           <h3>提示需要重新授权，或同步一直失败</h3>
           <ul>
@@ -361,8 +392,14 @@
 
           <h3>快照或回收站条目不见了</h3>
           <p>
-            快照默认最多保留 50 份、7 天；回收站默认保留 7 天。
+            快照默认最多保留 3 份、7 天；回收站默认保留 7 天。
             超过限制的条目会被自动清理。重要状态请及时导出 JSON 或 HTML 备份。
+          </p>
+
+          <h3>死链检测显示很多「无法确认」</h3>
+          <p>
+            401 / 403 / 429 / 5xx / 超时都算「无法确认」，这是刻意的保守策略：
+            只有明确返回 404 / 410 才会建议删除。如果某个站点总是误报，把它加入白名单即可。
           </p>
 
           <h3>另一台设备上的加密书签打不开</h3>
@@ -385,7 +422,7 @@
             那份，必要时在冲突中心选择版本，或从快照恢复。
           </p>
 
-          <h2 id="help">12. 获取帮助</h2>
+          <h2 id="help">13. 获取帮助</h2>
           <ul>
             <li>
               问题与建议：<a href="https://gitee.com/sunnice/book-mark-sync/issues">Gitee Issues</a>

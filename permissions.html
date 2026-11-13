@@ -29,7 +29,7 @@
 
     <main class="wrap wrap-narrow">
       <h1>权限说明</h1>
-      <p class="meta">对应扩展版本 1.0.0 · 审核与用户可见说明一致</p>
+      <p class="meta">对应扩展版本 1.1.0 · 审核与用户可见说明一致</p>
 
       <h2>单一用途</h2>
       <p>
@@ -72,8 +72,8 @@
 
       <h2>可选主机权限（按需申请）</h2>
       <p>
-        这些权限<strong>默认不授予</strong>，只在你点击"连接 GitHub"或"激活 License"时，
-        由浏览器弹出授权框，你同意后才生效。拒绝不影响书签本地管理。
+        这些权限<strong>默认不授予</strong>，只在你点击"连接 GitHub"、"激活 License" 或"开始检测"（死链检测）时，
+        由浏览器弹出授权框，你同意后才生效。拒绝不影响书签本地管理与同步。
       </p>
       <table>
         <thead>
@@ -109,6 +109,15 @@
             <td>License 激活、校验、释放设备。</td>
             <td>点击"激活 / 刷新"</td>
           </tr>
+          <tr>
+            <td><code>http://*/*</code>、<code>https://*/*</code></td>
+            <td>
+              死链检测：对书签里的网址发起一次普通 GET 请求，
+              <strong>只读取 HTTP 状态码，随后立即丢弃响应内容</strong>；
+              不带 Cookie、不带来源页、不注入脚本、不修改页面。
+            </td>
+            <td>点击"开始检测"</td>
+          </tr>
         </tbody>
       </table>
 
@@ -120,7 +129,11 @@
         <li><strong>history</strong>：不读取浏览历史。</li>
         <li><strong>webRequest / proxy</strong>：不拦截或修改任何网络请求。</li>
         <li><strong>cookies</strong>：不使用 Cookie。</li>
-        <li><strong>&lt;all_urls&gt;</strong>：不需要访问任意网站。</li>
+        <li>
+          <strong>必需权限里没有 <code>&lt;all_urls&gt;</code></strong>：
+          通配站点访问只存在于"可选权限"中，且仅用于死链检测；不用这个功能就永远不会申请，
+          扩展也没有任何内容脚本，拿不到网页内容。
+        </li>
       </ul>
 
       <h2>远程代码</h2>

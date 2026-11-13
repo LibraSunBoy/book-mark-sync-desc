@@ -30,7 +30,7 @@
     <main class="wrap wrap-narrow">
       <h1>隐私政策</h1>
       <p class="meta">
-        适用版本：书签坞 1.0.0（Chrome / Edge / Firefox 扩展） · 生效日期：2026-11-07
+        适用版本：书签坞 1.1.0（Chrome / Edge / Firefox 扩展） · 生效日期：2026-11-13
       </p>
 
       <div class="callout">
@@ -129,11 +129,23 @@
             <td>仅当你点击「激活」「刷新 License」时</td>
             <td>校验 License Key 与设备数</td>
           </tr>
+          <tr>
+            <td>书签里的任意网站<br />（<code>http://*/*</code>、<code>https://*/*</code>）</td>
+            <td>仅当你点击「开始检测」（死链检测）时</td>
+            <td>
+              普通 GET 请求，只读取 HTTP 状态码后立即断开；不读取页面内容、不带 Cookie、不带来源页，
+              结果只保留在本次界面中
+            </td>
+          </tr>
         </tbody>
       </table>
       <p>
         没有其他网络请求。扩展不加载远程代码，不下载远程脚本，不使用 CDN。
         上述网络权限默认未授予，会在你实际使用时按需申请。
+      </p>
+      <p class="note">
+        死链检测不经过任何第三方服务或 AI：没有服务器、没有中转、没有检测结果上报。
+        如果你不使用这个功能，扩展永远不会请求通配站点权限，也不会访问任何书签网址。
       </p>
 
       <h2>6. 权限说明</h2>
@@ -163,7 +175,10 @@
           </tr>
           <tr>
             <td>可选主机权限</td>
-            <td>仅在你连接 GitHub / 激活 License 时按需申请对应域名。</td>
+            <td>
+              仅在你连接 GitHub、激活 License、或点击「开始检测」时按需申请对应域名。
+              通配站点权限只用于死链检测。
+            </td>
           </tr>
         </tbody>
       </table>
@@ -214,9 +229,11 @@
         analytics, or telemetry. Your bookmarks are written directly to the storage you configure
         (currently your own GitHub Gist), using your own credentials. The only network requests are
         to <code>api.github.com</code> / <code>gist.githubusercontent.com</code> (sync),
-        <code>github.com</code> (OAuth device flow), and <code>api.lemonsqueezy.com</code> (only
-        when you activate a paid license). You can delete all local data by uninstalling the
-        extension, and delete remote data from your own Gist. Contact:
+        <code>github.com</code> (OAuth device flow), <code>api.lemonsqueezy.com</code> (only
+        when you activate a paid license), and — only when you explicitly run the dead link check —
+        the bookmarked sites themselves, where a single GET is made per URL and only the HTTP status
+        code is read (no page content, no cookies, no third-party service). You can delete all local
+        data by uninstalling the extension, and delete remote data from your own Gist. Contact:
         <code>dev@bookmarkdock.app</code>.
       </p>
 

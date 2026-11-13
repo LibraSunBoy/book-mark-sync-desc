@@ -30,7 +30,7 @@
     <main class="wrap">
       <section class="hero">
         <div class="hero-copy">
-          <span class="eyebrow">v1.0.0 · 核心同步永久免费</span>
+          <span class="eyebrow">v1.1.0 · 核心同步永久免费</span>
           <h1>书签同步，<br />本该免费</h1>
           <p class="lead">
             书签坞（BookmarkDock）把 Chrome、Edge、Firefox 的书签自动同步到
@@ -145,7 +145,11 @@
           <strong>删除熔断：</strong>一次删除超过 50 个或超过 10% 时先确认，避免误删扩散到所有设备。
         </li>
         <li>
-          <strong>历史与恢复：</strong>每次产生浏览器改动前自动保存快照，最多 50 份，默认保留 7 天。
+          <strong>历史与恢复：</strong>每次产生浏览器改动前自动保存快照，最多 3 份，默认保留 7 天。
+        </li>
+        <li>
+          <strong>死链检测：</strong>只读 HTTP 状态码，404 / 410 才判为死链；
+          403、429、5xx、超时一律「无法确认」不删除，支持白名单与手动确认。
         </li>
         <li><strong>一键撤销：</strong>把本机和云端一起退回上一次同步前。</li>
         <li><strong>回收站：</strong>删除的书签和文件夹保留 7 天，可搜索、批量恢复。</li>
@@ -185,6 +189,14 @@
           <img src="./screenshots/05-popup.png" alt="书签坞工具栏弹窗" loading="lazy" />
           <figcaption>工具栏弹窗：立即同步、查看状态、一键撤销。</figcaption>
         </figure>
+        <figure class="shot">
+          <img
+            src="./screenshots/06-maintenance.png"
+            alt="书签坞维护页：死链检测、白名单与自动删除开关"
+            loading="lazy"
+          />
+          <figcaption>死链检测：只读状态码，404 / 410 才建议删除，其余一律保留。</figcaption>
+        </figure>
       </div>
 
       <h2>隐私与安全</h2>
@@ -195,11 +207,14 @@
         </li>
         <li><strong>零遥测：</strong>没有分析、崩溃上报、A/B 测试或远程配置 SDK。</li>
         <li>
-          <strong>网络请求可枚举：</strong>只访问 GitHub（同步与授权）；v1.0
-          不启用付费闸门，正常使用不会触发其他请求。
+          <strong>网络请求可枚举：</strong>常规请求只访问 GitHub（同步与授权），License 校验仅在你主动激活时发生；
+          死链检测只在你点击「开始检测」时读取书签网址的 HTTP 状态码。
         </li>
         <li><strong>可选端到端加密：</strong>AES-256-GCM + Argon2id，云端只能看到密文。</li>
-        <li><strong>权限按需申请：</strong>不需要“读取所有网站”，不注入脚本，不读取页面内容。</li>
+        <li>
+          <strong>权限按需申请：</strong>安装时不申请任何网站权限；死链检测的站点访问权限只在点击「开始检测」时单独申请，
+          不注入脚本，不读取页面内容。
+        </li>
         <li><strong>开源可审计：</strong>源码公开，权限清单与网络请求都可以自行核对。</li>
       </ul>
       <p>
@@ -212,7 +227,7 @@
         <details open>
           <summary>真的免费吗？</summary>
           <p>
-            是。核心自动同步永久免费，不限制设备数量，也没有“高级同步”。 v1.0 全部功能免费，不校验
+            是。核心自动同步永久免费，不限制设备数量，也没有“高级同步”。 v1.1 全部功能免费，不校验
             License。
           </p>
         </details>
@@ -229,7 +244,7 @@
         </details>
         <details>
           <summary>支持 WebDAV、坚果云或 S3 吗？</summary>
-          <p>v1.0 仅支持 GitHub Gist。后续版本会评估更多 BYO 存储，但当前版本没有这些入口。</p>
+          <p>v1.1 仅支持 GitHub Gist。后续版本会评估更多 BYO 存储，但当前版本没有这些入口。</p>
         </details>
         <details>
           <summary>忘记加密密码怎么办？</summary>
@@ -264,7 +279,7 @@
       <footer class="site-foot">
         <div>
           <strong>书签坞 · BookmarkDock</strong>
-          <p>免费、即时、跨浏览器的书签同步 · v1.0.0 · 最近更新 2026-11-10</p>
+          <p>免费、即时、跨浏览器的书签同步 · v1.1.0 · 最近更新 2026-11-13</p>
         </div>
         <nav aria-label="页脚导航">
           <a href="./guide.html">使用文档</a>
