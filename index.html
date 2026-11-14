@@ -30,7 +30,7 @@
     <main class="wrap">
       <section class="hero">
         <div class="hero-copy">
-          <span class="eyebrow">v1.1.0 · 核心同步永久免费</span>
+          <span class="eyebrow">v1.1.1 · 核心同步永久免费</span>
           <h1>书签同步，<br />本该免费</h1>
           <p class="lead">
             书签坞（BookmarkDock）把 Chrome、Edge、Firefox 的书签自动同步到
@@ -151,6 +151,10 @@
           <strong>死链检测：</strong>只读 HTTP 状态码，404 / 410 才判为死链；
           403、429、5xx、超时一律「无法确认」不删除，支持白名单与手动确认。
         </li>
+        <li>
+          <strong>重复书签清理：</strong>同一分区、同一文件夹、标题和网址都相同的书签一键合并为一份；
+          不同文件夹里的同名书签不动，清理前自动保存快照。
+        </li>
         <li><strong>一键撤销：</strong>把本机和云端一起退回上一次同步前。</li>
         <li><strong>回收站：</strong>删除的书签和文件夹保留 7 天，可搜索、批量恢复。</li>
         <li>
@@ -260,6 +264,14 @@
           </p>
         </details>
         <details>
+          <summary>书签出现重复了怎么办？</summary>
+          <p>
+            如果是升级前产生的重复，打开 设置 → 维护 → 重复书签，先扫描再清理即可；清理前会自动
+            保存快照。同时建议只保留一种同步方式——浏览器自带的书签同步与书签坞同时开启时，
+            会不断把同一份书签重新变回新节点。
+          </p>
+        </details>
+        <details>
           <summary>卸载扩展会删除浏览器书签吗？</summary>
           <p>不会。卸载只会清除扩展自己的本地状态；浏览器书签和远端 Gist 都不受影响。</p>
         </details>
@@ -279,7 +291,7 @@
       <footer class="site-foot">
         <div>
           <strong>书签坞 · BookmarkDock</strong>
-          <p>免费、即时、跨浏览器的书签同步 · v1.1.0 · 最近更新 2026-11-13</p>
+          <p>免费、即时、跨浏览器的书签同步 · v1.1.1 · 最近更新 2026-11-14</p>
         </div>
         <nav aria-label="页脚导航">
           <a href="./guide.html">使用文档</a>
